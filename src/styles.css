@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html,body {
+    height:100% !important;
+    width:100% !important; 
+    margin:0px; 
+    padding:0px;
+    /* font-family: 'Lato', sans-serif !important;  */
+}
+body{
+    font-family: 'Lato', sans-serif !important;
+}
+/* .mat-card {
+    font-family: 'Lato', sans-serif;    
+} */
