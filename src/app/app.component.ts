@@ -23,6 +23,8 @@ export class AppComponent {
   showAllItems;
   hideSearchBar: boolean = true;
   title = 'app';
+  nextPage = 1;
+  lastPage = 0;
   sortByList = [{ value: 'login', viewValue: 'Name (Ascending)' },
   { value: '-login', viewValue: 'Name (Descending)' },
   { value: 'score', viewValue: 'Rank (Ascending)' },
@@ -40,6 +42,7 @@ export class AppComponent {
         .subscribe(a => {
           this.allUsers = a.items;
           this.totalValue = a.total_count;
+          this.allUsers.forEach(a => a.mode = 'C');
         })
     })
   }
@@ -48,10 +51,15 @@ export class AppComponent {
     formValues.value ? this.sortElementBy = formValues.value : null;
   }
   viewDetails(item) {
-    this.allRepro = [];
-    this.newHttp.get('https://api.github.com/users/' + item + '/repos').subscribe(res => {
-      this.allRepro = res;
-    })
+    if (item.mode == 'C') {
+      item.mode = 'D'
+      this.allRepro = [];
+      this.newHttp.get('https://api.github.com/users/' + item.login + '/repos').subscribe(res => {
+        this.allRepro = res;
+      })
+    } else {
+      item.mode = 'C'
+    }
   }
 }
 

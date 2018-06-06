@@ -1,24 +1,21 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <mat-form-field style="width: 200px;box-sizing: border-box;">
-      <mat-select placeholder="Sort By Name" [formControl]="sortBy">
-        <mat-option *ngFor="let item of sortByList" (click)="SortBy(item)" [value]="item.value">{{item.viewValue | titlecase}}</mat-option>
-      </mat-select>
-    </mat-form-field>&nbsp;&nbsp;
-    <div class="search-bar">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-evenly center">
+    <mat-select placeholder="Sort By Name" [formControl]="sortBy" style="width: 200px;box-sizing: border-box;color:black;padding: .5rem .5rem;background: #fff;font-size: 1rem;border-radius: 5px;">
+      <mat-option *ngFor="let item of sortByList" (click)="SortBy(item)" [value]="item.value">{{item.viewValue | titlecase}}</mat-option>
+    </mat-select>
+    <div class="search-bar" style="border-radius: 5px;">
       <form class="search-form" novalidate>
         <mat-icon>search</mat-icon>
-        <input [formControl]="searchCtrl" id="searchInput" placeholder="Search for anything here" type=search>
+        <input [formControl]="searchCtrl" id="searchInput" placeholder="Search here" type=search>
       </form>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<span>
-  <span style="margin: 3rem;padding-top: 50px;">
-    Totol Results : {{totalValue ? totalValue : 0}}
-  </span>
+<br>
+<span style="margin: 9rem;">
+  Total Results : {{totalValue ? totalValue : 0}}
   <mat-list *ngFor="let item of allUsers | orderBy : sortElementBy;">
-    <mat-card style="margin: 1rem 3rem 1rem 3rem;">
+    <mat-card style="margin: 0.5rem 8.5rem 0.5rem 8.5rem;">
       <mat-icon>
         <img src="{{item.avatar_url}}" style="width: 100px;height: 100px;border-radius: 50%;">
       </mat-icon>
@@ -34,7 +31,7 @@
         <mat-expansion-panel hideToggle=true>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <button (click)="viewDetails(item.login)" mat-button color="primary">Details</button>
+              <button (click)="viewDetails(item)" mat-button color="primary">{{item.mode =='C' ? 'Details' : 'Collapse' }}</button>
             </mat-panel-title>
             <mat-panel-description>
             </mat-panel-description>
@@ -61,9 +58,6 @@
           </mat-list>
         </mat-expansion-panel>
       </mat-accordion>
-
-      <!-- <button mat-button color="primary">Details</button>
-      <button mat-button color="primary">Collapse</button> -->
     </mat-card>
   </mat-list>
 </span>

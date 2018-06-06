@@ -1,8 +1,8 @@
-.search-bar {
+/* .search-bar {
     flex: 1 1 1e-09px;
     box-sizing: border-box;
     -webkit-box-flex: 1;
-}
+} */
 mat-toolbar .search-bar .search-form {
     background: #fff;
     position: relative;
