@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class CommonService {
     constructor(private newHttp: HttpClient, ) {
     }
-    getSearchResults(searchTerm): Observable<any> {
-        return this.newHttp.get('https://api.github.com/search/users?q=' + searchTerm)
+    getSearchResults(searchTerm, page?): Observable<any> {
+        return this.newHttp.get('https://api.github.com/search/users?q=' + searchTerm + '&page=' + page)
     }
 }

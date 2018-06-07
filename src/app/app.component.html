@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-evenly center">
-    <mat-select placeholder="Sort By Name" [formControl]="sortBy" style="width: 200px;box-sizing: border-box;color:black;padding: .5rem .5rem;background: #fff;font-size: 1rem;border-radius: 5px;">
+    <mat-select placeholder="Sort By Name" [formControl]="sortBy" style="width: 250px;box-sizing: border-box;color:black;padding: .5rem .5rem;background: #fff;font-size: 1rem;border-radius: 5px;">
       <mat-option *ngFor="let item of sortByList" (click)="SortBy(item)" [value]="item.value">{{item.viewValue | titlecase}}</mat-option>
     </mat-select>
-    <div class="search-bar" style="border-radius: 5px;">
+    <div class="search-bar" style="border-radius: 5px;width: 400px;">
       <form class="search-form" novalidate>
         <mat-icon>search</mat-icon>
         <input [formControl]="searchCtrl" id="searchInput" placeholder="Search here" type=search>
@@ -12,52 +12,61 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <br>
-<span style="margin: 9rem;">
+<div style="padding: 1rem 15rem 1rem 15rem;">
   Total Results : {{totalValue ? totalValue : 0}}
-  <mat-list *ngFor="let item of allUsers | orderBy : sortElementBy;">
-    <mat-card style="margin: 0.5rem 8.5rem 0.5rem 8.5rem;">
-      <mat-icon>
-        <img src="{{item.avatar_url}}" style="width: 100px;height: 100px;border-radius: 50%;">
-      </mat-icon>
-      <mat-list-item>
-        <h4 mat-line>
-          <b>User Name :</b>{{item.login}}
-        </h4>
-        <h4 mat-line>
-          <b>Profile Url :</b> {{item.html_url}}
-        </h4>
-      </mat-list-item>
-      <mat-accordion displayMode="flat">
-        <mat-expansion-panel hideToggle=true>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
+  <br>
+  <div style="height: 470px;overflow: auto;">
+    <!-- padding: 1rem 4rem 1rem 4rem; -->
+    <mat-list *ngFor="let item of allUsers | orderBy : sortElementBy;">
+      <mat-card>
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10px" style="height: 110px;">
+          <mat-icon fxFlex>
+            <img src="{{item.avatar_url}}" style="width: 100px;height: 100px;border-radius: 50%;">
+          </mat-icon>
+          <mat-list-item fxFlex=85>
+            <h4 mat-line>
+              <b>User Name :</b>{{item.login}}
+            </h4>
+            <h4 mat-line>
+              <b>Profile Url :</b> {{item.html_url}}
+            </h4>
+          </mat-list-item>
+        </div>
+        <mat-accordion displayMode="flat">
+          <mat-expansion-panel hideToggle=true>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b style="margin-top: 10px;">Repository Details</b>
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
               <button (click)="viewDetails(item)" mat-button color="primary">{{item.mode =='C' ? 'Details' : 'Collapse' }}</button>
-            </mat-panel-title>
-            <mat-panel-description>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-list *ngFor="let item of allRepro">
-            <hr>
-            <mat-list-item>
-              <h4 mat-line>
-                <b>Name :</b>{{item.name}}
-              </h4>
-              <h4 mat-line>
-                <b>Repository Url :</b> {{item.html_url}}
-              </h4>
-              <h4 mat-line>
-                <b> Fork : </b>{{item.forks_count}}
-              </h4>
-              <h4 mat-line>
-                <b> Watchers :</b> {{item.watchers}}
-              </h4>
-              <h4 mat-line>
-                <b> Open Issues :</b> {{item.open_issues_count}}
-              </h4>
-            </mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-card>
-  </mat-list>
-</span>
+            </mat-expansion-panel-header>
+            <mat-list *ngFor="let item of allRepro">
+              <hr>
+              <mat-list-item>
+                <h4 mat-line>
+                  <b>Name :</b>{{item.name}}
+                </h4>
+                <h4 mat-line>
+                  <b>Repository Url :</b> {{item.html_url}}
+                </h4>
+                <h4 mat-line>
+                  <b> Fork : </b>{{item.forks_count}}
+                </h4>
+                <h4 mat-line>
+                  <b> Watchers :</b> {{item.watchers}}
+                </h4>
+                <h4 mat-line>
+                  <b> Open Issues :</b> {{item.open_issues_count}}
+                </h4>
+              </mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card>
+    </mat-list>
+  </div>
+</div>
+<mat-paginator #paginator style="padding: 0rem 15rem 0rem 15rem;" (click)="nextPage(paginator)" [length]="totalValue" [pageSize]="30">
+</mat-paginator>

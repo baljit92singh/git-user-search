@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { MatButtonModule, MatCheckboxModule, MatSelectModule, MatListModule, MatExpansionModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatSelectModule, MatListModule, MatExpansionModule, MatPaginatorModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,6 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     MatIconModule,
     RouterModule,
+    MatPaginatorModule,
   ],
   exports: [
     OrderBy
